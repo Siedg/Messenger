@@ -14,7 +14,6 @@ class MainActivity : AppCompatActivity() {
         val email = email_edittext_registerscreen.toString()
         val password = password_edittext_registerscreen.toString()
 
-
         register_button_registerscreen.setOnClickListener {
             Log.d("MainActivity", "Email: $email")
             Log.d("MainActivity", "Password: $password")
