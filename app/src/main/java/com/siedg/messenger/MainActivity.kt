@@ -18,7 +18,8 @@ class MainActivity : AppCompatActivity() {
 
         alreadyhaveaccount_textview_registerscreen.setOnClickListener {
             Log.d("MainActivity", "Try to show login activity")
-            val intent = Intent(this, LoginActivity::class.java)
+            val intent = Intent(this@MainActivity, LoginActivity::class.java)
+            Toast.makeText(this, "Started LoginActivity", Toast.LENGTH_SHORT).show()
             startActivity(intent)
         }
     }
