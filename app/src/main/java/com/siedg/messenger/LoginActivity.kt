@@ -2,12 +2,14 @@ package com.siedg.messenger
 
 import android.os.Bundle
 import android.os.PersistableBundle
+import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
 import com.google.firebase.auth.FirebaseAuth
 import kotlinx.android.synthetic.main.activity_login.*
 
 class LoginActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?, persistentState: PersistableBundle?) {
+        Log.d("LoginActivity", "=====")
         super.onCreate(savedInstanceState, persistentState)
         setContentView(R.layout.activity_login)
 
