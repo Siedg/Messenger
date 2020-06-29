@@ -25,6 +25,10 @@ class RegisterActivity : AppCompatActivity() {
 
         selectphoto_button_registerscreen.setOnClickListener {
             Log.d("MainActivity", "Try to show the photo selector")
+
+            val intent = Intent(Intent.ACTION_PICK)
+            intent.type = "image/*"
+            startActivityForResult(intent, 0)
         }
     }
 
