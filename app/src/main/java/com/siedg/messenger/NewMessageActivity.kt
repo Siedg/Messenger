@@ -23,18 +23,9 @@ class NewMessageActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_new_message)
-
         supportActionBar?.title = "Select User"
-
-//        val adapter = GroupAdapter<GroupieViewHolder>()
-//        adapter.add(UserItem())
-//        adapter.add(UserItem())
-//        adapter.add(UserItem())
-//        recyclerview_newmesaage.adapter
-
         recyclerview_newmesaage.layoutManager = LinearLayoutManager(this)
         fetchUsers()
-
     }
 
     private fun fetchUsers() {
