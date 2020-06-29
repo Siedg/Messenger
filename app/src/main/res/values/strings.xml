@@ -8,4 +8,5 @@
     <string name="login">Login</string>
     <string name="select_photo">SELECT PHOTO</string>
     <string name="sign_out">Sign Out</string>
+    <string name="username">Username</string>
 </resources>
