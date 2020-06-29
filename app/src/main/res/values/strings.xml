@@ -1,6 +1,5 @@
 <resources>
     <string name="app_name">Messenger</string>
-    <string name="username">Username</string>
     <string name="already_have_an_account">Already have an account?</string>
     <string name="register">Register</string>
     <string name="email">Email</string>
