@@ -45,6 +45,7 @@ class NewMessageActivity : AppCompatActivity() {
                 adapter.setOnItemClickListener { item, view ->
                     val intent = Intent(view.context, ChatLogActivity::class.java)
                     startActivity(intent)
+                    finish()
                 }
                 recyclerview_newmesaage.adapter = adapter
             }
