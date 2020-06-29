@@ -3,6 +3,7 @@ package com.siedg.messenger
 import android.app.Activity
 import android.content.Intent
 import android.graphics.drawable.BitmapDrawable
+import android.net.Uri
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.provider.MediaStore
@@ -35,14 +36,15 @@ class RegisterActivity : AppCompatActivity() {
         }
     }
 
+    var selectedPhotoUri: Uri? = null
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
 
         if (requestCode == 0 && resultCode == Activity.RESULT_OK && data != null) {
             Log.d("RegisterActivity", "Photo was selectet")
 
-            val uri = data.data
-            val bitmap = MediaStore.Images.Media.getBitmap(contentResolver, uri)
+            selectedPhotoUri = data.data
+            val bitmap = MediaStore.Images.Media.getBitmap(contentResolver, selectedPhotoUri)
             val bitmapDrawable = BitmapDrawable(bitmap)
             selectphoto_button_registerscreen.setBackgroundDrawable(bitmapDrawable)
         }
@@ -72,10 +74,15 @@ class RegisterActivity : AppCompatActivity() {
                     "MainActivity",
                     "Successfully created user with uid: ${it.result!!.user!!.uid}"
                 )
+
+                uploadImageToFirebaseStorage()
             }
             .addOnFailureListener {
                 Log.d("MainActivity", "Failed to create user: ${it.message}")
                 Toast.makeText(this, "Failed to create user: ${it.message}", Toast.LENGTH_SHORT).show()
             }
+    }
+    private fun uploadImageToFirebaseStorage() {
+
     }
 }
