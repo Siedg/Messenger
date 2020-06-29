@@ -23,14 +23,14 @@ class RegisterActivity : AppCompatActivity() {
         }
 
         alreadyhaveaccount_textview_registerscreen.setOnClickListener {
-            Log.d("MainActivity", "Try to show login activity")
+            Log.d("RegisterActivity", "Try to show login activity")
             val intent = Intent(this, LoginActivity::class.java)
             Toast.makeText(this, "Started LoginActivity", Toast.LENGTH_SHORT).show()
             startActivity(intent)
         }
 
         selectphoto_button_registerscreen.setOnClickListener {
-            Log.d("MainActivity", "Try to show the photo selector")
+            Log.d("RegisterActivity", "Try to show the photo selector")
 
             val intent = Intent(Intent.ACTION_PICK)
             intent.type = "image/*"
@@ -66,21 +66,21 @@ class RegisterActivity : AppCompatActivity() {
             return
         }
 
-        Log.d("MainActivity", "Email: $email")
-        Log.d("MainActivity", "Password: $password")
+        Log.d("RegisterActivity", "Email: $email")
+        Log.d("RegisterActivity", "Password: $password")
 
         FirebaseAuth.getInstance().createUserWithEmailAndPassword(email, password)
             .addOnCompleteListener {
                 if (!it.isSuccessful) return@addOnCompleteListener
                 Log.d(
-                    "MainActivity",
+                    "RegisterActivity",
                     "Successfully created user with uid: ${it.result!!.user!!.uid}"
                 )
 
                 uploadImageToFirebaseStorage()
             }
             .addOnFailureListener {
-                Log.d("MainActivity", "Failed to create user: ${it.message}")
+                Log.d("RegisterActivity", "Failed to create user: ${it.message}")
                 Toast.makeText(this, "Failed to create user: ${it.message}", Toast.LENGTH_SHORT).show()
             }
     }
