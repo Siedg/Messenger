@@ -93,6 +93,14 @@ class RegisterActivity : AppCompatActivity() {
         ref.putFile(selectedPhotoUri!!)
             .addOnSuccessListener {
                 Log.d("Register", "Successfully uploaded image: ${it.metadata?.path}")
+
+                ref.downloadUrl.addOnSuccessListener {
+                    saveUserToFirebaseDatabase()
+                }
             }
+    }
+
+    private fun saveUserToFirebaseDatabase() {
+        Firebase
     }
 }
