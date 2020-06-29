@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="#218CFF"
-    tools:context=".MainActivity" >
+    tools:context=".RegisterActivity" >
 
     <EditText
         android:id="@+id/username_edittext_registerscreen"
@@ -25,7 +25,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/button" />
+        app:layout_constraintTop_toBottomOf="@+id/selectphoto_button_registerscreen" />
 
     <EditText
         android:id="@+id/email_edittext_registerscreen"
@@ -83,7 +83,7 @@
         app:layout_constraintTop_toBottomOf="@+id/register_button_registerscreen" />
 
     <Button
-        android:id="@+id/button"
+        android:id="@+id/selectphoto_button_registerscreen"
         android:layout_width="150dp"
         android:layout_height="150dp"
         android:layout_marginTop="64dp"

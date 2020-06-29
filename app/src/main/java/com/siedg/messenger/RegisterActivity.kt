@@ -8,7 +8,7 @@ import android.widget.Toast
 import com.google.firebase.auth.FirebaseAuth
 import kotlinx.android.synthetic.main.activity_main.*
 
-class MainActivity : AppCompatActivity() {
+class RegisterActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
@@ -21,6 +21,10 @@ class MainActivity : AppCompatActivity() {
             val intent = Intent(this, LoginActivity::class.java)
             Toast.makeText(this, "Started LoginActivity", Toast.LENGTH_SHORT).show()
             startActivity(intent)
+        }
+
+        selectphoto_button_registerscreen.setOnClickListener {
+            Log.d("MainActivity", "Try to show the photo selector")
         }
     }
 
