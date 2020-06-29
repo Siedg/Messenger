@@ -33,7 +33,7 @@ class RegisterActivity : AppCompatActivity() {
 
         selectphoto_button_registerscreen.setOnClickListener {
             Log.d("RegisterActivity", "Try to show the photo selector")
-            val intent = Intent(Intent.ACTION_PICK)
+            val intent = Intent(Intent.ACTION_PICK, MediaStore.Images.Media.INTERNAL_CONTENT_URI)
             intent.type = "image/*"
             startActivityForResult(intent, 0)
         }
