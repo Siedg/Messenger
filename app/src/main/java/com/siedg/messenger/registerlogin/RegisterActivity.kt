@@ -1,8 +1,7 @@
-package com.siedg.messenger
+package com.siedg.messenger.registerlogin
 
 import android.app.Activity
 import android.content.Intent
-import android.graphics.drawable.BitmapDrawable
 import android.net.Uri
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
@@ -12,6 +11,9 @@ import android.widget.Toast
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.storage.FirebaseStorage
+import com.siedg.messenger.R
+import com.siedg.messenger.messages.LastestMessagesActivity
+import com.siedg.messenger.models.User
 import kotlinx.android.synthetic.main.activity_register.*
 import java.util.*
 
@@ -109,7 +111,11 @@ class RegisterActivity : AppCompatActivity() {
         val uid = FirebaseAuth.getInstance().uid ?: ""
         val ref = FirebaseDatabase.getInstance().getReference("/users/$uid")
 
-        val user = User(uid, username_edittext_registerscreen.text.toString(), profileImageUrl)
+        val user = User(
+            uid,
+            username_edittext_registerscreen.text.toString(),
+            profileImageUrl
+        )
         ref.setValue(user)
             .addOnSuccessListener {
                 Log.d("RegisterActivity", "Saved user to Firebase Database")
@@ -120,8 +126,4 @@ class RegisterActivity : AppCompatActivity() {
             }
 
     }
-}
-
-class User(val uid: String, val username: String, val profileImageUrl: String) {
-    constructor() : this("", "", "")
 }
