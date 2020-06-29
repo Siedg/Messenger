@@ -95,4 +95,16 @@
         android:background="@drawable/rounded_select_photo_button"
         />
 
+    <de.hdodenhof.circleimageview.CircleImageView
+        android:id="@+id/selectphoto_imageview_registerscreen"
+        android:layout_width="150dp"
+        android:layout_height="150dp"
+        app:civ_border_width="4dp"
+        app:layout_constraintTop_toTopOf="@id/selectphoto_button_registerscreen"
+        app:layout_constraintBottom_toBottomOf="@+id/selectphoto_button_registerscreen"
+        app:layout_constraintStart_toStartOf="@id/selectphoto_button_registerscreen"
+        app:layout_constraintEnd_toEndOf="@+id/selectphoto_button_registerscreen">
+
+    </de.hdodenhof.circleimageview.CircleImageView>
+
 </androidx.constraintlayout.widget.ConstraintLayout>
