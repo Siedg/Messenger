@@ -25,15 +25,16 @@ class NewMessageActivity : AppCompatActivity() {
 
         supportActionBar?.title = "Select User"
 
-        val adapter = GroupAdapter<GroupieViewHolder>()
-        adapter.add(UserItem())
-        adapter.add(UserItem())
-        adapter.add(UserItem())
-
-        fetchUsers()
-
-        recyclerview_newmesaage.adapter
+//        val adapter = GroupAdapter<GroupieViewHolder>()
+//        adapter.add(UserItem())
+//        adapter.add(UserItem())
+//        adapter.add(UserItem())
+//
+//        fetchUsers()
+//
+//        recyclerview_newmesaage.adapter
         recyclerview_newmesaage.layoutManager = LinearLayoutManager(this)
+        fetchUsers()
 
     }
 
