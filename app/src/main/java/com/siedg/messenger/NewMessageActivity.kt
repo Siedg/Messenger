@@ -50,7 +50,7 @@ class NewMessageActivity : AppCompatActivity() {
                     val user = it.getValue(User::class.java)
 
                     if (user != null) {
-                        adapter.add(UserItem())
+                        adapter.add(UserItem(user))
                     }
                 }
                 recyclerview_newmesaage.adapter = adapter
