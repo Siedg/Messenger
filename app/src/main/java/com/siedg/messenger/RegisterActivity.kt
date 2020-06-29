@@ -10,6 +10,7 @@ import android.provider.MediaStore
 import android.util.Log
 import android.widget.Toast
 import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.storage.FirebaseStorage
 import kotlinx.android.synthetic.main.activity_main.*
 import java.util.*
@@ -84,6 +85,7 @@ class RegisterActivity : AppCompatActivity() {
                 Toast.makeText(this, "Failed to create user: ${it.message}", Toast.LENGTH_SHORT).show()
             }
     }
+
     private fun uploadImageToFirebaseStorage() {
         if (selectedPhotoUri == null) return
 
@@ -95,12 +97,21 @@ class RegisterActivity : AppCompatActivity() {
                 Log.d("Register", "Successfully uploaded image: ${it.metadata?.path}")
 
                 ref.downloadUrl.addOnSuccessListener {
-                    saveUserToFirebaseDatabase()
+                    saveUserToFirebaseDatabase(it.toString())
                 }
             }
     }
 
-    private fun saveUserToFirebaseDatabase() {
-        Firebase
+    private fun saveUserToFirebaseDatabase(profileImageUrl: String) {
+        val uid = FirebaseAuth.getInstance().uid ?: ""
+        val ref = FirebaseDatabase.getInstance().getReference("/users/$uid")
+
+        val user = User(uid, username_edittext_registerscreen.text.toString(), profileImageUrl)
+        ref.setValue(user)
+            .addOnSuccessListener {
+                Log.d("RegisterActivity", "Saved user to Firebase Database")
+            }
     }
 }
+
+class User(val, uid: String, val username: String, val profileImageUrl: String)
