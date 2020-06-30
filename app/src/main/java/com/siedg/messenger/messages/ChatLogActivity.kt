@@ -15,18 +15,28 @@ class ChatLogActivity : AppCompatActivity() {
         supportActionBar?.title = "Chat Log"
 
         val adapter = GroupAdapter<GroupieViewHolder>()
-        adapter.add(ChatItem())
+        //adapter.add(ChatItem())
         recyclerview_chat_log.adapter = adapter
     }
 }
 
 
-class ChatItem: Item<GroupieViewHolder() {
+class ChatFromItem: Item<GroupieViewHolder>() {
     override fun bind(viewHolder: GroupieViewHolder, position: Int) {
 
     }
 
     override fun getLayout(): Int {
         return R.layout.chat_from_row
+    }
+}
+
+class ChatToItem: Item<GroupieViewHolder>() {
+    override fun bind(viewHolder: GroupieViewHolder, position: Int) {
+
+    }
+
+    override fun getLayout(): Int {
+        return R.layout.chat_to_row
     }
 }
