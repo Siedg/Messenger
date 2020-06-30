@@ -3,6 +3,7 @@ package com.siedg.messenger.messages
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import com.siedg.messenger.R
+import com.siedg.messenger.models.User
 import com.xwray.groupie.GroupAdapter
 import com.xwray.groupie.GroupieViewHolder
 import com.xwray.groupie.Item
@@ -14,8 +15,8 @@ class ChatLogActivity : AppCompatActivity() {
         setContentView(R.layout.activity_chat_log)
         supportActionBar?.title = "Chat Log"
 
-        val username = intent.getStringArrayExtra(NewMessageActivity.USER_KEY)
-        supportActionBar?.title = username!!.toString()
+        val user = intent.getParcelableExtra<User>(NewMessageActivity.USER_KEY)
+        supportActionBar?.title = user?.username
 
         val adapter = GroupAdapter<GroupieViewHolder>()
         //adapter.add(ChatItem())
