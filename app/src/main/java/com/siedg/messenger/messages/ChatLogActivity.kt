@@ -28,6 +28,8 @@ class ChatLogActivity : AppCompatActivity() {
 
     val adapter = GroupAdapter<GroupieViewHolder>()
 
+    var toUser: User? = null
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_chat_log)
@@ -35,8 +37,8 @@ class ChatLogActivity : AppCompatActivity() {
 
         recyclerview_chat_log.adapter = adapter
 
-        val user = intent.getParcelableExtra<User>(NewMessageActivity.USER_KEY)
-        supportActionBar?.title = user?.username
+        toUser = intent.getParcelableExtra<User>(NewMessageActivity.USER_KEY)
+        supportActionBar?.title = toUser.username
 
         val adapter = GroupAdapter<GroupieViewHolder>()
         //adapter.add(ChatItem())
@@ -55,10 +57,9 @@ class ChatLogActivity : AppCompatActivity() {
         ref.addChildEventListener(object: ChildEventListener {
             override fun onChildAdded(snapshot: DataSnapshot, previousChildName: String?) {
                 val chatMessage = snapshot.getValue(ChatMessage::class.java)
-                val toUser = intent.getParcelableExtra<User>(NewMessageActivity.USER_KEY)
                 if (chatMessage != null) {
                     if (chatMessage.fromId == FirebaseAuth.getInstance().uid) {
-                        adapter.add(ChatFromItem(chatMessage.text))
+                        adapter.add(ChatFromItem(chatMessage.text, ))
                     } else {
                         adapter.add(ChatToItem(chatMessage.text, toUser!!))
                     }
