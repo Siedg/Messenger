@@ -86,11 +86,12 @@ class ChatLogActivity : AppCompatActivity() {
     }
 
     private fun performSendMessage() {
-        val ref = FirebaseDatabase.getInstance().getReference("/messages").push()
+        //val ref = FirebaseDatabase.getInstance().getReference("/messages").push()
         val text = edittext_chat_log.text.toString()
         val fromId = FirebaseAuth.getInstance().uid
         val user = intent.getParcelableExtra<User>(NewMessageActivity.USER_KEY)
         val toId = user!!.uid
+        val ref = FirebaseDatabase.getInstance().getReference("/user-messages/$fromId/$toId").push()
 
         //TODO Check fields
 
