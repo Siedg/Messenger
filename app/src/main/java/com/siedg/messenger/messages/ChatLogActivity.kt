@@ -9,6 +9,7 @@ import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.FirebaseDatabase
 import com.siedg.messenger.R
+import com.siedg.messenger.models.ChatMessage
 import com.siedg.messenger.models.User
 import com.xwray.groupie.GroupAdapter
 import com.xwray.groupie.GroupieViewHolder
@@ -68,8 +69,6 @@ class ChatLogActivity : AppCompatActivity() {
             }
         })
     }
-
-    class ChatMessage(val id: String, val text: String, val fromId: String, val toId: String, val timestamp: Long)
 
     private fun performSendMessage() {
         val ref = FirebaseDatabase.getInstance().getReference("/messages").push()
