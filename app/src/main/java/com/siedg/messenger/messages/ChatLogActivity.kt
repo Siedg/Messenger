@@ -3,6 +3,7 @@ package com.siedg.messenger.messages
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
+import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.FirebaseDatabase
 import com.siedg.messenger.R
 import com.siedg.messenger.models.User
@@ -38,12 +39,18 @@ class ChatLogActivity : AppCompatActivity() {
         }
     }
 
-    class ChatMessage(val text: String)
+    class ChatMessage(val id: String, val text: String, val fromId: String, val toId: String, val timestamp: Long)
 
     private fun performSendMessage() {
         val ref = FirebaseDatabase.getInstance().getReference("/messages").push()
         val text = edittext_chat_log.text.toString()
-        val chatMessage = ChatMessage(text)
+        val fromId = FirebaseAuth.getInstance().uid
+        val user = intent.getParcelableExtra<User>(NewMessageActivity.USER_KEY)
+        val toId = user!!.uid
+
+        //TODO Check fields
+
+        val chatMessage = ChatMessage(ref.key!!, text, fromId!!, toId, System.currentTimeMillis() / 1000)
         ref.setValue(chatMessage)
             .addOnSuccessListener {
                 Log.d(TAG, "Saved chat message: ${ref.key}")
