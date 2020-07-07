@@ -4,6 +4,9 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
 import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.database.ChildEventListener
+import com.google.firebase.database.DataSnapshot
+import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.FirebaseDatabase
 import com.siedg.messenger.R
 import com.siedg.messenger.models.User
@@ -33,10 +36,37 @@ class ChatLogActivity : AppCompatActivity() {
         //adapter.add(ChatItem())
         recyclerview_chat_log.adapter = adapter
 
+        listenForMessages()
         send_button_chat_log.setOnClickListener {
             Log.d(TAG, "Attempting to send message...")
             performSendMessage()
         }
+    }
+
+    private fun listenForMessages() {
+        val ref = FirebaseDatabase.getInstance().getReference("/messages")
+
+        ref.addChildEventListener(object: ChildEventListener {
+            override fun onChildAdded(snapshot: DataSnapshot, previousChildName: String?) {
+                val chatMessage = snapshot.getValue(ChatMessage::class.java)
+            }
+
+            override fun onCancelled(error: DatabaseError) {
+
+            }
+
+            override fun onChildChanged(snapshot: DataSnapshot, previousChildName: String?) {
+
+            }
+
+            override fun onChildMoved(snapshot: DataSnapshot, previousChildName: String?) {
+
+            }
+
+            override fun onChildRemoved(snapshot: DataSnapshot) {
+
+            }
+        })
     }
 
     class ChatMessage(val id: String, val text: String, val fromId: String, val toId: String, val timestamp: Long)
