@@ -94,6 +94,7 @@ class ChatLogActivity : AppCompatActivity() {
         val user = intent.getParcelableExtra<User>(NewMessageActivity.USER_KEY)
         val toId = user!!.uid
         val ref = FirebaseDatabase.getInstance().getReference("/user-messages/$fromId/$toId").push()
+        val toRef = FirebaseDatabase.getInstance().getReference("/user-messages/$toId/$fromId").push()
 
         //TODO Check fields
 
@@ -101,7 +102,10 @@ class ChatLogActivity : AppCompatActivity() {
         ref.setValue(chatMessage)
             .addOnSuccessListener {
                 Log.d(TAG, "Saved chat message: ${ref.key}")
+                edittext_chat_log.text.clear()
+                recyclerview_chat_log.scrollToPosition(adapter.itemCount - 1)
             }
+        toRef.setValue(chatMessage)
     }
 }
 
