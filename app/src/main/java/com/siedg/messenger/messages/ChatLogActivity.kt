@@ -8,6 +8,9 @@ import com.xwray.groupie.GroupAdapter
 import com.xwray.groupie.GroupieViewHolder
 import com.xwray.groupie.Item
 import kotlinx.android.synthetic.main.activity_chat_log.*
+import kotlinx.android.synthetic.main.chat_from_row.view.*
+import kotlinx.android.synthetic.main.chat_to_row.view.*
+import kotlinx.android.synthetic.main.user_row_new_message.view.*
 
 class ChatLogActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -24,10 +27,9 @@ class ChatLogActivity : AppCompatActivity() {
     }
 }
 
-
-class ChatFromItem: Item<GroupieViewHolder>() {
+class ChatFromItem(val text: String): Item<GroupieViewHolder>() {
     override fun bind(viewHolder: GroupieViewHolder, position: Int) {
-
+        viewHolder.itemView.textview_from_row.text = text
     }
 
     override fun getLayout(): Int {
@@ -35,9 +37,9 @@ class ChatFromItem: Item<GroupieViewHolder>() {
     }
 }
 
-class ChatToItem: Item<GroupieViewHolder>() {
+class ChatToItem(val text: String): Item<GroupieViewHolder>() {
     override fun bind(viewHolder: GroupieViewHolder, position: Int) {
-
+        viewHolder.itemView.textview_to_row.text = text
     }
 
     override fun getLayout(): Int {
