@@ -14,6 +14,8 @@ import com.google.firebase.database.ValueEventListener
 import com.siedg.messenger.R
 import com.siedg.messenger.models.User
 import com.siedg.messenger.registerlogin.RegisterActivity
+import com.xwray.groupie.GroupieViewHolder
+import com.xwray.groupie.Item
 
 class LastestMessagesActivity : AppCompatActivity() {
 
@@ -28,6 +30,15 @@ class LastestMessagesActivity : AppCompatActivity() {
 
         fetchCurrentUser()
         verifyLogIn()
+    }
+
+    class LatestMessageRow: Item<GroupieViewHolder>() {
+        override fun bind(viewHolder: GroupieViewHolder, position: Int) {
+
+        }
+        override fun getLayout(): Int {
+            return R.layout.lastest_message_row
+        }
     }
 
     private fun fetchCurrentUser() {
