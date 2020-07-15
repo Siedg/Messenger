@@ -78,6 +78,28 @@ class LatestMessagesActivity : AppCompatActivity() {
     class LatestMessageRow(val chatMessage: ChatMessage): Item<GroupieViewHolder>() {
         override fun bind(viewHolder: GroupieViewHolder, position: Int) {
             viewHolder.itemView.message_textview_latest_message.text = chatMessage.text
+
+            val chatPartnerId: String
+            if (chatMessage.fromId == FirebaseAuth.getInstance().uid) {
+                chatPartnerId = chatMessage.toId
+            } else {
+                chatPartnerId = chatMessage.fromId
+            }
+
+            val ref = FirebaseDatabase.getInstance().getReference("/users/$chatPartnerId")
+            ref.addListenerForSingleValueEvent(object: ValueEventListener {
+                override fun onDataChange(snapshot: DataSnapshot) {
+                    val user = snapshot.getValue(User::class.java)
+                    viewHolder.itemView.username_textview_latest_message.text = user?.username
+                }
+
+                override fun onCancelled(error: DatabaseError) {
+
+                }
+
+            })
+
+
         }
         override fun getLayout(): Int {
             return R.layout.latest_message_row
@@ -95,7 +117,7 @@ class LatestMessagesActivity : AppCompatActivity() {
             }
 
             override fun onCancelled(error: DatabaseError) {
-                TODO("Not yet implemented")
+
             }
         })
     }
