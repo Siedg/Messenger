@@ -12,6 +12,7 @@ import com.siedg.messenger.R
 import com.siedg.messenger.models.ChatMessage
 import com.siedg.messenger.models.User
 import com.siedg.messenger.registerlogin.RegisterActivity
+import com.squareup.picasso.Picasso
 import com.xwray.groupie.GroupAdapter
 import com.xwray.groupie.GroupieViewHolder
 import com.xwray.groupie.Item
@@ -91,6 +92,9 @@ class LatestMessagesActivity : AppCompatActivity() {
                 override fun onDataChange(snapshot: DataSnapshot) {
                     val user = snapshot.getValue(User::class.java)
                     viewHolder.itemView.username_textview_latest_message.text = user?.username
+
+                    val targetImageView = viewHolder.itemView.imageview_latest_message
+                    Picasso.get().load(user?.profileImageUrl).into(targetImageView)
                 }
 
                 override fun onCancelled(error: DatabaseError) {
