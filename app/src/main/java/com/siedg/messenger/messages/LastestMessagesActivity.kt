@@ -37,6 +37,8 @@ class LastestMessagesActivity : AppCompatActivity() {
         verifyLogIn()
     }
 
+    val latestMessagesMap = HashMap<String, ChatMessage>()
+
     private fun listenForLastestMessages() {
         val fromId = FirebaseAuth.getInstance().uid
         val ref = FirebaseDatabase.getInstance().getReference("lastest-messages/$fromId")
@@ -47,12 +49,14 @@ class LastestMessagesActivity : AppCompatActivity() {
 
             override fun onChildAdded(snapshot: DataSnapshot, previousChildName: String?) {
                 val chatMessage = snapshot.getValue(ChatMessage::class.java) ?: return
-                adapter.add(LatestMessageRow(chatMessage))
+                latestMessagesMap[snapshot.key!!] = chatMessage
+                refreshRecyclerViewMessages()
             }
 
             override fun onChildChanged(snapshot: DataSnapshot, previousChildName: String?) {
                 val chatMessage = snapshot.getValue(ChatMessage::class.java) ?: return
-                adapter.add(LatestMessageRow(chatMessage))
+                latestMessagesMap[snapshot.key!!] = chatMessage
+                refreshRecyclerViewMessages()
             }
 
             override fun onChildMoved(snapshot: DataSnapshot, previousChildName: String?) {
@@ -63,6 +67,13 @@ class LastestMessagesActivity : AppCompatActivity() {
 
             }
         })
+    }
+
+    private fun refreshRecyclerViewMessages() {
+        adapter.clear()
+        latestMessagesMap.values.forEach {
+            adapter.add(LatestMessageRow(it))
+        }
     }
 
     class LatestMessageRow(val chatMessage: ChatMessage): Item<GroupieViewHolder>() {
