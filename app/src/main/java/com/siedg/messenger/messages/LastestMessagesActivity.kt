@@ -6,16 +6,17 @@ import android.os.Bundle
 import android.util.Log
 import android.view.Menu
 import android.view.MenuItem
+import androidx.recyclerview.widget.RecyclerView
 import com.google.firebase.auth.FirebaseAuth
-import com.google.firebase.database.DataSnapshot
-import com.google.firebase.database.DatabaseError
-import com.google.firebase.database.FirebaseDatabase
-import com.google.firebase.database.ValueEventListener
+import com.google.firebase.database.*
 import com.siedg.messenger.R
+import com.siedg.messenger.models.ChatMessage
 import com.siedg.messenger.models.User
 import com.siedg.messenger.registerlogin.RegisterActivity
+import com.xwray.groupie.GroupAdapter
 import com.xwray.groupie.GroupieViewHolder
 import com.xwray.groupie.Item
+import kotlinx.android.synthetic.main.activity_lastest_messages.*
 
 class LastestMessagesActivity : AppCompatActivity() {
 
@@ -24,12 +25,42 @@ class LastestMessagesActivity : AppCompatActivity() {
         var TAG = "LastestMessagesActivity"
     }
 
+    val adapter = GroupAdapter<GroupieViewHolder>()
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_lastest_messages)
+        recyclerview_lastest_messages.adapter = adapter
 
+        listenForLastestMessages()
         fetchCurrentUser()
         verifyLogIn()
+    }
+
+    private fun listenForLastestMessages() {
+        val fromId = FirebaseAuth.getInstance().uid
+        val ref = FirebaseDatabase.getInstance().getReference("lastest-messages/$fromId")
+        ref.addChildEventListener(object: ChildEventListener {
+            override fun onCancelled(error: DatabaseError) {
+
+            }
+
+            override fun onChildAdded(snapshot: DataSnapshot, previousChildName: String?) {
+                val chatMessage = snapshot.getValue(ChatMessage::class.java)
+                adapter.add(LatestMessageRow())
+            }
+
+            override fun onChildChanged(snapshot: DataSnapshot, previousChildName: String?) {
+
+            }
+
+            override fun onChildMoved(snapshot: DataSnapshot, previousChildName: String?) {
+
+            }
+
+            override fun onChildRemoved(snapshot: DataSnapshot) {
+
+            }
+        })
     }
 
     class LatestMessageRow: Item<GroupieViewHolder>() {
