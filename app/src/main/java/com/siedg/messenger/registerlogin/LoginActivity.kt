@@ -6,7 +6,7 @@ import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
 import com.google.firebase.auth.FirebaseAuth
 import com.siedg.messenger.R
-import com.siedg.messenger.messages.LastestMessagesActivity
+import com.siedg.messenger.messages.LatestMessagesActivity
 import kotlinx.android.synthetic.main.activity_login.*
 
 class LoginActivity : AppCompatActivity() {
@@ -20,7 +20,7 @@ class LoginActivity : AppCompatActivity() {
             Log.d("LoginActivity", "Email: $email \nPassword: $password \n\n")
             FirebaseAuth.getInstance().signInWithEmailAndPassword(email, password)
                 .addOnCompleteListener {
-                    val intent = Intent(this, LastestMessagesActivity::class.java)
+                    val intent = Intent(this, LatestMessagesActivity::class.java)
                     startActivity(intent)
                 }
                 .addOnFailureListener {}

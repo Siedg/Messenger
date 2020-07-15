@@ -12,7 +12,7 @@ import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.storage.FirebaseStorage
 import com.siedg.messenger.R
-import com.siedg.messenger.messages.LastestMessagesActivity
+import com.siedg.messenger.messages.LatestMessagesActivity
 import com.siedg.messenger.models.User
 import kotlinx.android.synthetic.main.activity_register.*
 import java.util.*
@@ -107,7 +107,7 @@ class RegisterActivity : AppCompatActivity() {
         ref.setValue(user)
             .addOnSuccessListener {
                 Log.d("RegisterActivity", "Saved user to Firebase Database")
-                val intent = Intent(this, LastestMessagesActivity::class.java)
+                val intent = Intent(this, LatestMessagesActivity::class.java)
                 intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TASK.or(Intent.FLAG_ACTIVITY_NEW_TASK)
                 startActivity(intent)
             }

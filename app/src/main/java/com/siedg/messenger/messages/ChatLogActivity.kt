@@ -18,7 +18,6 @@ import com.xwray.groupie.Item
 import kotlinx.android.synthetic.main.activity_chat_log.*
 import kotlinx.android.synthetic.main.chat_from_row.view.*
 import kotlinx.android.synthetic.main.chat_to_row.view.*
-import kotlinx.android.synthetic.main.user_row_new_message.view.*
 
 class ChatLogActivity : AppCompatActivity() {
 
@@ -61,7 +60,7 @@ class ChatLogActivity : AppCompatActivity() {
                 val chatMessage = snapshot.getValue(ChatMessage::class.java)
                 if (chatMessage != null) {
                     if (chatMessage.fromId == FirebaseAuth.getInstance().uid) {
-                        val currentUser = LastestMessagesActivity.currentUser
+                        val currentUser = LatestMessagesActivity.currentUser
                         adapter.add(ChatFromItem(chatMessage.text, currentUser!!))
                     } else {
                         adapter.add(ChatToItem(chatMessage.text, toUser!!))

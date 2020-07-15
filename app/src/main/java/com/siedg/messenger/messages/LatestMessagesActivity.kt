@@ -6,7 +6,6 @@ import android.os.Bundle
 import android.util.Log
 import android.view.Menu
 import android.view.MenuItem
-import androidx.recyclerview.widget.RecyclerView
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.*
 import com.siedg.messenger.R
@@ -16,10 +15,10 @@ import com.siedg.messenger.registerlogin.RegisterActivity
 import com.xwray.groupie.GroupAdapter
 import com.xwray.groupie.GroupieViewHolder
 import com.xwray.groupie.Item
-import kotlinx.android.synthetic.main.activity_lastest_messages.*
-import kotlinx.android.synthetic.main.lastest_message_row.view.*
+import kotlinx.android.synthetic.main.activity_latest_messages.*
+import kotlinx.android.synthetic.main.latest_message_row.view.*
 
-class LastestMessagesActivity : AppCompatActivity() {
+class LatestMessagesActivity : AppCompatActivity() {
 
     companion object {
         var currentUser: User? = null
@@ -29,8 +28,8 @@ class LastestMessagesActivity : AppCompatActivity() {
     val adapter = GroupAdapter<GroupieViewHolder>()
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_lastest_messages)
-        recyclerview_lastest_messages.adapter = adapter
+        setContentView(R.layout.activity_latest_messages)
+        recyclerview_latest_messages.adapter = adapter
 
         listenForLastestMessages()
         fetchCurrentUser()
@@ -81,7 +80,7 @@ class LastestMessagesActivity : AppCompatActivity() {
             viewHolder.itemView.message_textview_latest_message.text = chatMessage.text
         }
         override fun getLayout(): Int {
-            return R.layout.lastest_message_row
+            return R.layout.latest_message_row
         }
     }
 
