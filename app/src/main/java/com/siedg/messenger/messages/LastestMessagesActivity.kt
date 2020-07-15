@@ -51,7 +51,8 @@ class LastestMessagesActivity : AppCompatActivity() {
             }
 
             override fun onChildChanged(snapshot: DataSnapshot, previousChildName: String?) {
-
+                val chatMessage = snapshot.getValue(ChatMessage::class.java) ?: return
+                adapter.add(LatestMessageRow(chatMessage))
             }
 
             override fun onChildMoved(snapshot: DataSnapshot, previousChildName: String?) {
