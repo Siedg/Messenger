@@ -17,6 +17,7 @@ import com.xwray.groupie.GroupAdapter
 import com.xwray.groupie.GroupieViewHolder
 import com.xwray.groupie.Item
 import kotlinx.android.synthetic.main.activity_lastest_messages.*
+import kotlinx.android.synthetic.main.lastest_message_row.view.*
 
 class LastestMessagesActivity : AppCompatActivity() {
 
@@ -45,8 +46,8 @@ class LastestMessagesActivity : AppCompatActivity() {
             }
 
             override fun onChildAdded(snapshot: DataSnapshot, previousChildName: String?) {
-                val chatMessage = snapshot.getValue(ChatMessage::class.java)
-                adapter.add(LatestMessageRow())
+                val chatMessage = snapshot.getValue(ChatMessage::class.java) ?: return
+                adapter.add(LatestMessageRow(chatMessage))
             }
 
             override fun onChildChanged(snapshot: DataSnapshot, previousChildName: String?) {
@@ -63,9 +64,9 @@ class LastestMessagesActivity : AppCompatActivity() {
         })
     }
 
-    class LatestMessageRow: Item<GroupieViewHolder>() {
+    class LatestMessageRow(val chatMessage: ChatMessage): Item<GroupieViewHolder>() {
         override fun bind(viewHolder: GroupieViewHolder, position: Int) {
-
+            viewHolder.itemView.message_textview_latest_message.text = chatMessage.text
         }
         override fun getLayout(): Int {
             return R.layout.lastest_message_row
